@@ -29,7 +29,7 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
 .cnt b{font-size:16px;font-weight:700;color:#1a1a1a;}
 
 /* 卡片 */
-.card{border-bottom:1px solid #e0dbd0;padding:14px 0;}
+.card{border-bottom:1px solid #e0dbd0;padding:14px 0;position:relative;}
 .card:first-child{border-top:1px solid #e0dbd0;}
 
 /* 學名：最大最粗 */
@@ -41,8 +41,10 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
   line-height:1.25;
   margin-bottom:2px;
 }
-.dspec{font-size:12px;font-weight:400;color:#6a7a8a;font-family:Arial,sans-serif;margin-bottom:2px;}
+.dspec{font-size:13px;font-weight:400;color:#cc2200;font-family:Arial,sans-serif;margin-left:8px;}
+.drug-top{display:flex;align-items:baseline;flex-wrap:wrap;margin-bottom:3px;}
 .dname{font-size:13px;font-weight:400;color:#9a8a78;margin-bottom:10px;}
+.dcod{font-size:10px;color:#3a3a3a;letter-spacing:0.05em;position:absolute;top:14px;right:0;}
 
 /* 儲位並列 */
 .slots{display:flex;gap:8px;}
@@ -90,9 +92,9 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
   </div>
 
   <div class="body">
-    <div class="hint">可輸入：<span>學名</span><span>中文名稱</span><span>英文商品名</span><span>西藥局儲位</span>即時查詢</div>
+    <div class="hint">可輸入：<span>學名</span><span>中文名稱</span><span>英文商品名</span><span>西藥局儲位</span><span>料號</span>即時查詢</div>
     <div class="srow">
-      <input type="text" id="si" placeholder="輸入關鍵字即時搜尋…" oninput="onInput()"/>
+      <input type="text" id="si" placeholder="藥名 / 學名 / 料號 / 儲位…" oninput="onInput()"/>
       <button class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
     </div>
     <div class="update-bar" id="updateBar">資料載入中…</div>
@@ -185,8 +187,11 @@ function render() {
   }
   r.innerHTML = slice.map(d => `
     <div class="card">
-      <div class="dgen">${d.g || d.t || '—'}</div>
-      ${d.s ? `<div class="dspec">${d.s}</div>` : ''}
+      ${d.c ? `<div class="dcod">料號　${d.c}</div>` : ''}
+      <div class="drug-top">
+        <span class="dgen">${d.g || d.t || '—'}</span>
+        ${d.s ? `<span class="dspec">${d.s}</span>` : ''}
+      </div>
       <div class="dname">${d.n}</div>
       <div class="slots">
         <div class="sb p">
