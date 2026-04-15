@@ -29,7 +29,7 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
 .cnt b{font-size:16px;font-weight:700;color:#1a1a1a;}
 
 /* 卡片 */
-.card{border-bottom:1px solid #e0dbd0;padding:14px 0;position:relative;}
+.card{border-bottom:1px solid #e0dbd0;padding:14px 0;}
 .card:first-child{border-top:1px solid #e0dbd0;}
 
 /* 學名：最大最粗 */
@@ -44,7 +44,7 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
 .dspec{font-size:13px;font-weight:400;color:#cc2200;font-family:Arial,sans-serif;margin-left:8px;}
 .drug-top{display:flex;align-items:baseline;flex-wrap:wrap;margin-bottom:3px;}
 .dname{font-size:13px;font-weight:400;color:#9a8a78;margin-bottom:10px;}
-.dcod{font-size:10px;color:#3a3a3a;letter-spacing:0.05em;position:absolute;top:14px;right:0;}
+.dcod{font-size:12px;font-weight:600;color:#1a1a1a;letter-spacing:0.05em;text-align:right;margin-bottom:6px;}
 
 /* 儲位並列 */
 .slots{display:flex;gap:8px;}
@@ -124,7 +124,7 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
 
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbx9OP0JyYx9aBHgOCVgYiE6wBSetz3OSG34ZMf3Dp3nyV03Vrs752jqYUZHhi7WDLgF/exec';
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 5;
 const REFRESH_INTERVAL = 60 * 60 * 1000;
 let ALL = [], filtered = [], page = 0, cs = '';
 
@@ -196,11 +196,11 @@ function render() {
       <div class="slots">
         <div class="sb p">
           <div class="sh"><div class="si">${iP}</div><div class="sl">西藥局儲位</div></div>
-          <div class="sn-wrap"><div class="sn">${d.p || '—'}</div><div class="sen">Pharmacy</div></div>
+          <div class="sn-wrap"><div class="sn">${d.p || '—'}</div></div>
         </div>
         <div class="sb wh">
           <div class="sh"><div class="si">${iW}</div><div class="sl">藥庫儲位</div></div>
-          <div class="sn-wrap"><div class="sn">${d.w || '—'}</div><div class="sen">Warehouse</div></div>
+          <div class="sn-wrap"><div class="sn">${d.w || '—'}</div></div>
         </div>
       </div>
     </div>`).join('');
