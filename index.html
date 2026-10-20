@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>台中慈濟醫院－藥品母庫儲位查詢</title>
+<title>台中慈濟醫院－西藥子庫儲位查詢</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;font-family:'Noto Sans JP',sans-serif;}
+body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;font-family:Arial,'Noto Sans JP',sans-serif;}
 .frame{width:100%;max-width:430px;min-height:100vh;display:flex;flex-direction:column;background:#fff;}
 .hdr{padding:22px 18px 16px;border-bottom:3px solid #F5C800;display:flex;align-items:center;gap:12px;}
 .hdr-bar{width:8px;height:58px;background:#F5C800;flex-shrink:0;border-radius:1px;}
@@ -19,7 +19,7 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
 .hint span{background:#F5C800;color:#1a1a1a;font-weight:700;padding:1px 6px;font-size:10px;flex-shrink:0;}
 
 .srow{display:flex;border:2px solid #F5C800;overflow:hidden;margin-bottom:8px;}
-.srow input{flex:1;padding:12px 14px;border:none;font-size:15px;font-weight:300;background:#fff;color:#1a1a1a;outline:none;font-family:'Noto Sans JP',sans-serif;}
+.srow input{flex:1;padding:12px 14px;border:none;font-size:15px;font-weight:300;background:#fff;color:#1a1a1a;outline:none;font-family:Arial,'Noto Sans JP',sans-serif;}
 .srow input::placeholder{color:#ccc;font-size:13px;}
 .clear-btn{padding:0 14px;border:none;background:#fff;color:#bbb;font-size:18px;cursor:pointer;display:none;align-items:center;}
 .clear-btn.show{display:flex;}
@@ -37,14 +37,15 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
   font-size:20px;
   font-weight:900;
   color:#1a1a1a;
-  font-family:'Noto Sans JP','Arial Black',Arial,sans-serif;
+  font-family:Arial,'Noto Sans JP',sans-serif;
   line-height:1.25;
   margin-bottom:2px;
 }
 .dspec{font-size:13px;font-weight:400;color:#cc2200;font-family:Arial,sans-serif;margin-left:8px;}
-.drug-top{display:flex;align-items:baseline;flex-wrap:wrap;margin-bottom:3px;}
+.drug-top{display:flex;align-items:baseline;flex-wrap:wrap;margin-bottom:3px;row-gap:2px;}
 .dname{font-size:13px;font-weight:400;color:#9a8a78;margin-bottom:10px;}
-.dcod{font-size:12px;font-weight:600;color:#1a1a1a;letter-spacing:0.05em;text-align:right;margin-bottom:6px;}
+.dbrand{font-family:Arial,sans-serif;font-weight:700;color:#3a3a3a;margin-left:10px;}
+.dcod{font-size:12px;font-weight:600;color:#1a1a1a;letter-spacing:0.05em;margin-left:auto;padding-left:10px;white-space:nowrap;}
 
 /* 儲位並列 */
 .slots{display:flex;gap:8px;}
@@ -52,9 +53,9 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
 .sh{display:flex;height:26px;}
 .si{width:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .si svg{width:12px;height:12px;stroke:#1a1a1a;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.sl{flex:1;display:flex;align-items:center;padding:0 8px;font-size:11px;font-weight:700;letter-spacing:0.03em;}
-.sn-wrap{display:flex;align-items:baseline;gap:6px;padding:8px 10px 10px;}
-.sn{font-size:22px;font-weight:700;letter-spacing:0.05em;line-height:1;}
+.sl{flex:1;display:flex;align-items:center;justify-content:center;padding:0 8px;font-size:11px;font-weight:700;letter-spacing:0.03em;}
+.sn-wrap{display:flex;align-items:center;justify-content:center;padding:12px 8px 14px;min-height:90px;overflow:hidden;}
+.sn{font-size:66px;font-weight:700;letter-spacing:0.02em;line-height:1;white-space:nowrap;text-align:center;}
 .sen{font-size:8px;font-weight:300;letter-spacing:0.1em;align-self:flex-end;padding-bottom:2px;opacity:0.5;}
 
 .p .si{background:#F5C800;}.p .sl{background:#F5C800;color:#1a1a1a;}
@@ -69,7 +70,7 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
 .empty{text-align:center;padding:3rem 1rem;color:#b0a090;font-size:13px;}
 .err{text-align:center;padding:1.5rem;color:#993333;font-size:12px;border:1px solid #f0c0c0;border-radius:4px;background:#fff8f8;line-height:2;}
 .pg{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 0 8px;}
-.pg-btn{padding:7px 18px;border:1.5px solid #F5C800;background:#fff;color:#1a1a1a;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.1em;font-family:'Noto Sans JP',sans-serif;}
+.pg-btn{padding:7px 18px;border:1.5px solid #F5C800;background:#fff;color:#1a1a1a;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.1em;font-family:Arial,'Noto Sans JP',sans-serif;}
 .pg-btn:disabled{border-color:#e0dbd0;color:#ccc;cursor:default;}
 .pg-btn:not(:disabled):hover{background:#F5C800;}
 .pg-info{font-size:12px;font-weight:300;color:#9a8a78;min-width:60px;text-align:center;}
@@ -84,13 +85,42 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
 .footer-name-lg{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:0.06em;}
 .footer-name-md{font-size:12px;font-weight:500;color:#3a3a3a;letter-spacing:0.06em;}
 .footer-year{font-size:11px;font-weight:300;color:#b0a090;letter-spacing:0.2em;font-family:Arial,sans-serif;}
+
+/* ===== 修正模式 ===== */
+.hdr{position:relative;}
+.edit-toggle{position:absolute;top:14px;right:14px;padding:5px 10px;border:1.5px solid #e0dbd0;background:#fff;color:#9a8a78;font-size:11px;font-weight:700;letter-spacing:0.1em;cursor:pointer;font-family:Arial,'Noto Sans JP',sans-serif;}
+.edit-toggle.on{background:#cc2200;border-color:#cc2200;color:#fff;}
+.edit-banner{display:none;background:#cc2200;color:#fff;font-size:12px;font-weight:700;padding:8px 18px;letter-spacing:0.08em;justify-content:space-between;align-items:center;}
+.edit-banner.show{display:flex;}
+.edit-banner input{width:90px;padding:3px 6px;border:none;font-size:12px;font-family:Arial,'Noto Sans JP',sans-serif;}
+.ed{display:none;margin-top:10px;padding:10px;background:#fff8e0;border:1.5px dashed #F5C800;}
+.editing .ed{display:block;}
+.ed-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 8px;}
+.ed label{display:flex;flex-direction:column;font-size:10px;color:#7a6a5a;font-weight:700;gap:2px;}
+.ed label.full{grid-column:1/-1;}
+.ed input{width:100%;min-width:0;padding:7px 8px;border:1px solid #d8cfb8;font-size:14px;font-family:Arial,'Noto Sans JP',sans-serif;background:#fff;}
+.ed input.loc{font-size:17px;font-weight:700;letter-spacing:0.05em;}
+.ed input.chg{border-color:#cc2200;background:#fff2ee;}
+.ed-act{display:flex;gap:8px;margin-top:8px;align-items:center;}
+.ed-save{flex:1;padding:9px;border:none;background:#0d2a5e;color:#F5C800;font-weight:700;font-size:13px;letter-spacing:0.15em;cursor:pointer;font-family:Arial,'Noto Sans JP',sans-serif;}
+.ed-save:disabled{background:#ccc;color:#fff;cursor:default;}
+.ed-reset{padding:9px 12px;border:1px solid #d8cfb8;background:#fff;color:#7a6a5a;font-size:12px;cursor:pointer;font-family:Arial,'Noto Sans JP',sans-serif;}
+.ed-msg{font-size:11px;margin-top:6px;min-height:14px;}
+.ed-msg.ok{color:#2a7a2a;}.ed-msg.bad{color:#cc2200;}
+.card.saved{animation:flash 1.2s;}
+@keyframes flash{0%{background:#e6f6e6;}100%{background:transparent;}}
 </style>
 </head>
 <body>
 <div class="frame">
   <div class="hdr">
     <div class="hdr-bar"></div>
-    <div class="htitle">台中慈濟醫院<br>藥品母庫（藥庫）儲位查詢</div>
+    <div class="htitle">台中慈濟醫院<br>西藥子庫（藥庫）儲位查詢</div>
+    <button class="edit-toggle" id="editToggle" onclick="toggleEdit()">修正</button>
+  </div>
+  <div class="edit-banner" id="editBanner">
+    <span>✎ 修正模式中・修改後按「儲存」寫回資料庫</span>
+    <input id="editorName" placeholder="修正人" maxlength="10"/>
   </div>
 
   <div class="body">
@@ -119,16 +149,17 @@ body{background:#f0ede8;display:flex;justify-content:center;min-height:100vh;fon
     <div class="footer-divider"></div>
     <div class="footer-row"><span class="footer-label">指導</span><span class="footer-name-lg">陳綺華 部主任・李雅蓁 主任</span></div>
     <div class="footer-row"><span class="footer-label">製作</span><span class="footer-name-md">許文馨</span></div>
-    <div class="footer-row"><span class="footer-label">協力</span><span class="footer-name-md">張紀卿・胡家瑜・廖暄旻</span></div>
+    <div class="footer-row"><span class="footer-label">協力</span><span class="footer-name-md">張紀卿・胡家瑜・廖暄旻・王皓儀</span></div>
     <div class="footer-divider"></div>
-    <div class="footer-year">2026.4</div>
+    <div class="footer-year">2026.10</div>
   </div>
 </div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbx9OP0JyYx9aBHgOCVgYiE6wBSetz3OSG34ZMf3Dp3nyV03Vrs752jqYUZHhi7WDLgF/exec';
-const PAGE_SIZE = 5;
+const API_URL = 'https://script.google.com/macros/s/AKfycbw2-6gN9JDu1NnZ5OuUpeIFglHBnYqKEIIrEX6O_3RxrtVggN1n7W3cbIjFuf22hB1IVg/exec';
+const PAGE_SIZE = 10;
 const REFRESH_INTERVAL = 60 * 60 * 1000;
+const CACHE_KEY = 'drugStorageCache_v2';
 let ALL = [], filtered = [], page = 0, cs = '';
 
 const iP = `<svg viewBox="0 0 16 16"><path d="M3 8h10M8 3v10"/></svg>`;
@@ -142,37 +173,75 @@ function formatTime(date) {
 
 async function loadData(isRefresh = false) {
   try {
-    if (!isRefresh) {
+    if (!isRefresh && !ALL.length) {
       document.getElementById('res').innerHTML =
         '<div class="loading"><span class="ld"></span><span class="ld"></span><span class="ld"></span><br><br>資料載入中…</div>';
     }
-    const res = await fetch(API_URL + '?t=' + Date.now());
+    let tm, res;
+    const timeout = new Promise((_, rej) => tm = setTimeout(() => rej(new Error('連線逾時（30 秒）')), 30000));
+    try { res = await Promise.race([fetch(API_URL + '?t=' + Date.now()), timeout]); }
+    catch (fe) { throw new Error(fe.message.includes('逾時') ? fe.message : '連不到 Apps Script：' + fe.message); }
+    finally { clearTimeout(tm); }
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const rows = await res.json();
+    const txt = await res.text();
+    let rows;
+    try { rows = JSON.parse(txt); }
+    catch (_) {
+      const t = (txt.match(/<title>([^<]*)/i) || [])[1] || '';
+      const b = txt.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120);
+      throw new Error('後端回傳的不是資料：' + (t + ' ' + b).trim());
+    }
+    if (!Array.isArray(rows)) throw new Error('後端格式錯誤：' + txt.slice(0, 120));
 
-    ALL = rows.map(r => ({
-      p: String(r['西藥局儲位'] || '').trim(),
-      w: String(r['藥庫儲位']   || '').trim(),
-      n: String(r['中文名稱']   || '').trim(),
-      g: String(r['學名']       || '').trim(),
-      s: String(r['規格']       || '').trim(),
-      c: String(r['料號']       || '').trim(),
-      t: String(r['英文商品名稱'] || '').trim(),
-    })).filter(d => d.n || d.g || d.p);
-
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), rows })); } catch(_) {}
+    ALL = mapRows(rows);
     const now = new Date();
     document.getElementById('updateBar').innerHTML =
       `資料更新：<span>${formatTime(now)}</span>　共 ${ALL.length} 筆　每小時自動同步`;
-    run();
+    if (EDIT) render(); else { const keep = page; run(); if (isRefresh) { page = Math.min(keep, totalPages()-1); render(); } }
   } catch(e) {
-    document.getElementById('updateBar').innerHTML = `⚠ 更新失敗：${e.message}`;
-    if (!isRefresh) {
+    document.getElementById('updateBar').innerHTML = `⚠ 更新失敗：${e.message}` + (ALL.length ? '（顯示上次資料）' : '');
+    if (!ALL.length) {
       document.getElementById('res').innerHTML =
         `<div class="err">⚠ 無法載入資料<br><small>${e.message}</small></div>`;
       document.getElementById('cnt').innerHTML = '';
     }
   }
 }
+
+function mapRows(rows) {
+  return rows.map(r => ({
+      row: r['_row'],
+      p: String(r['西藥局儲位'] || '').trim(),
+      w: String(r['藥庫儲位']   || '').trim(),
+      n: String(r['中文名稱']   || '').trim(),
+      g: String(r['學名']       || '').trim(),
+      s: String(r['規格']       || '').trim(),
+      c: String(r['料號']       || '').trim(),
+      t: String(r['英文商品名'] || '').trim(),
+    })).filter(d => d.n || d.g || d.p);
+}
+
+function loadCache() {
+  try {
+    const c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+    if (!c || !Array.isArray(c.rows)) return;
+    ALL = mapRows(c.rows);
+    document.getElementById('updateBar').innerHTML =
+      `上次資料：<span>${formatTime(new Date(c.t))}</span>　共 ${ALL.length} 筆　同步中…`;
+    run();
+  } catch(_) {}
+}
+
+
+function fitSlots() {
+  document.querySelectorAll('.sn').forEach(el => {
+    let fs = 66; el.style.fontSize = fs + 'px';
+    const max = el.parentElement.clientWidth - 16;
+    while (el.scrollWidth > max && fs > 18) { fs -= 2; el.style.fontSize = fs + 'px'; }
+  });
+}
+window.addEventListener('resize', () => fitSlots());
 
 function totalPages() { return Math.ceil(filtered.length / PAGE_SIZE) || 1; }
 
@@ -182,6 +251,7 @@ function render() {
   const slice = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
   document.getElementById('cnt').innerHTML = `<b>${total}</b> 件`;
   const r = document.getElementById('res');
+  r.classList.toggle('editing', EDIT);
   const pg = document.getElementById('pgbar');
   if (!total) {
     r.innerHTML = '<div class="empty">查無符合藥品，請嘗試其他關鍵字</div>';
@@ -189,13 +259,13 @@ function render() {
     return;
   }
   r.innerHTML = slice.map(d => `
-    <div class="card">
-      ${d.c ? `<div class="dcod">料號　${d.c}</div>` : ''}
+    <div class="card" data-i="${ALL.indexOf(d)}">
       <div class="drug-top">
         <span class="dgen">${d.g || d.t || '—'}</span>
         ${d.s ? `<span class="dspec">${d.s}</span>` : ''}
+        ${d.c ? `<span class="dcod">料號　${d.c}</span>` : ''}
       </div>
-      <div class="dname">${d.n}</div>
+      <div class="dname">${d.n}${d.t ? `<span class="dbrand">${d.t}</span>` : ''}</div>
       <div class="slots">
         <div class="sb p">
           <div class="sh"><div class="si">${iP}</div><div class="sl">西藥局儲位</div></div>
@@ -206,7 +276,9 @@ function render() {
           <div class="sn-wrap"><div class="sn">${d.w || '—'}</div></div>
         </div>
       </div>
+      ${EDIT ? edBlock(d, ALL.indexOf(d)) : ''}
     </div>`).join('');
+  fitSlots();
   pg.style.display = tp > 1 ? 'flex' : 'none';
   document.getElementById('pginfo').textContent = `${page + 1} / ${tp}`;
   document.getElementById('prevBtn').disabled = page === 0;
@@ -242,8 +314,85 @@ function clearSearch() {
 }
 
 function changePage(dir) { page += dir; window.scrollTo(0,0); render(); }
+
+// ===== 修正模式 =====
+let EDIT = false, PIN = '';
+const FIELDS = [
+  ['p','西藥局儲位','loc'],['w','藥庫儲位','loc'],
+  ['g','學名','full'],['n','中文名稱','full'],
+  ['t','英文商品名',''],['s','規格',''],['c','料號','full'],
+];
+const esc = v => String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+
+function edBlock(d, i) {
+  if (!d.row) return '<div class="ed"><div class="ed-msg bad">後端尚未回傳列號，請先更新 Apps Script</div></div>';
+  return `<div class="ed">
+    <div class="ed-grid">
+      ${FIELDS.map(([k,lab,cls]) => `<label class="${cls==='full'?'full':''}">${lab}
+        <input class="${cls==='loc'?'loc':''}" data-k="${k}" value="${esc(d[k])}" oninput="markChg(this,${i})"/></label>`).join('')}
+    </div>
+    <div class="ed-act">
+      <button class="ed-save" disabled onclick="saveRow(${i},this)">儲存</button>
+      <button class="ed-reset" onclick="render()">復原</button>
+    </div>
+    <div class="ed-msg"></div>
+  </div>`;
+}
+
+function markChg(inp, i) {
+  inp.classList.toggle('chg', inp.value.trim() !== ALL[i][inp.dataset.k]);
+  const ed = inp.closest('.ed');
+  ed.querySelector('.ed-save').disabled = !ed.querySelector('input.chg');
+}
+
+async function post(body) {
+  const res = await fetch(API_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(body) });
+  return res.json();
+}
+
+async function toggleEdit() {
+  if (EDIT) { EDIT = false; applyEdit(); return; }
+  const pin = prompt('請輸入修正密碼');
+  if (!pin) return;
+  try {
+    const r = await post({ action:'auth', pin });
+    if (!r.ok) { alert(r.msg || '密碼錯誤'); return; }
+  } catch(e) { alert('連線失敗：' + e.message); return; }
+  PIN = pin; EDIT = true;
+  try { document.getElementById('editorName').value = localStorage.getItem('editorName') || ''; } catch(_) {}
+  applyEdit();
+}
+
+function applyEdit() {
+  document.getElementById('editToggle').classList.toggle('on', EDIT);
+  document.getElementById('editToggle').textContent = EDIT ? '結束修正' : '修正';
+  document.getElementById('editBanner').classList.toggle('show', EDIT);
+  render();
+}
+
+async function saveRow(i, btn) {
+  const d = ALL[i], ed = btn.closest('.ed'), msg = ed.querySelector('.ed-msg');
+  const KEY = Object.fromEntries(FIELDS.map(f => [f[0], f[1]]));
+  const changes = {};
+  ed.querySelectorAll('input.chg').forEach(inp => changes[KEY[inp.dataset.k]] = inp.value.trim());
+  const editor = document.getElementById('editorName').value.trim();
+  try { localStorage.setItem('editorName', editor); } catch(_) {}
+  btn.disabled = true; btn.textContent = '儲存中…'; msg.className = 'ed-msg'; msg.textContent = '';
+  try {
+    const r = await post({ action:'update', pin:PIN, row:d.row, origCode:d.c, origName:d.n, changes, editor });
+    if (!r.ok) throw new Error(r.msg || '儲存失敗');
+    ed.querySelectorAll('input.chg').forEach(inp => d[inp.dataset.k] = inp.value.trim());
+    const pg = page; render(); page = pg;
+    const card = document.querySelector(`.card[data-i="${i}"]`);
+    if (card) { card.classList.add('saved'); const m = card.querySelector('.ed-msg'); m.className='ed-msg ok'; m.textContent = `✓ 已寫回 ${r.n} 欄`; }
+  } catch(e) {
+    btn.disabled = false; btn.textContent = '儲存';
+    msg.className = 'ed-msg bad'; msg.textContent = '⚠ ' + e.message;
+  }
+}
+loadCache();
 loadData(false);
-setInterval(() => loadData(true), REFRESH_INTERVAL);
+setInterval(() => { if (!EDIT) loadData(true); }, REFRESH_INTERVAL);
 </script>
 </body>
 </html>
